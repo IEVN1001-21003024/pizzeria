@@ -1,0 +1,47 @@
+<div class="fixed bottom-0 right-0 w-1/4 p-4 bg-gray-900 border border-gray-700 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 m-0">
+    <div class="flex items-center justify-between mb-4">
+        <h5 class="text-xl font-bold leading-none text-gray-300 dark:text-white">Ventas</h5>
+    </div>
+    
+    <!-- Campos para seleccionar fecha o mes -->
+    <div class="mb-4">
+        <select #diaSemana class="w-full p-2 border rounded bg-gray-800 border-gray-700 text-gray-300 mb-2">
+            <option value="lunes">Lunes</option>
+            <option value="martes">Martes</option>
+            <option value="miercoles">Miércoles</option>
+            <option value="jueves">Jueves</option>
+            <option value="viernes">Viernes</option>
+            <option value="sabado">Sábado</option>
+            <option value="domingo">Domingo</option>
+        </select>
+        <button (click)="verVentasPorDia(diaSemana.value)" class="w-full p-2 bg-blue-600 text-white rounded mb-4">Ver Ventas por Día</button>
+
+        <input type="month" #fechaMes class="w-full p-2 border rounded bg-gray-800 border-gray-700 text-gray-300 mb-2" />
+        <button (click)="verVentasPorMes(fechaMes.value)" class="w-full p-2 bg-blue-600 text-white rounded">Ver Ventas por Mes</button>
+    </div>
+
+    <!-- Lista de Ventas -->
+    <div class="flow-root">
+        <ul role="list" class="divide-y divide-gray-700 dark:divide-gray-700">
+            <li class="py-3 sm:py-4" *ngFor="let venta of ventas">
+                <div class="flex items-center">
+                    <div class="flex-1 min-w-0 ms-4">
+                        <p class="text-sm font-medium text-gray-300 dark:text-white">
+                            {{ venta.cliente.nombre }}
+                        </p>
+                        <p class="text-sm text-gray-400 truncate dark:text-gray-400">
+                            {{ venta.cliente.direccion }} - {{ venta.cliente.telefono }}
+                        </p>
+                    </div>
+                    <div class="inline-flex items-center text-base font-semibold text-gray-300 dark:text-white">
+                        {{ venta.total | currency }}
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <!-- Suma total de las ventas mostradas -->
+        <div class="inline-flex items-center text-base font-semibold text-gray-300 dark:text-white mt-4">
+            Total : {{ totalVentas | currency }}
+        </div>
+    </div>
+</div>
